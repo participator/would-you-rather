@@ -2,10 +2,9 @@ import { _getQuestions, _getUsers } from "./_DATA";
 
 export const getInitialData = () => {
     return Promise.all([_getQuestions(), _getUsers()])
-        .then(([questions, users]) => {
-            return {
+        .then(([questions, users]) => ({
                 questions,
                 users
-            }
-        })
+            })
+        )
 }

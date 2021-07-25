@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import NavElement from './NavElement'
+import Profile from './Profile'
 
 class Nav extends Component {
     render() {
@@ -8,32 +10,29 @@ class Nav extends Component {
         return (
             <div>
                 <ul>
-                    <li>Home</li>
-                    <li>Leaderboard</li>
-                    <li>New</li>
-                    <li>
-                        <img src={avatarURL} alt="Current User" />
-                        {name}
-                    </li>
+                    <NavElement label="Home" />
+                    <NavElement label="Leaderboard" />
+                    <NavElement label="Create" />
                 </ul>
+                {
+                    (name && avatarURL) &&
+                    <Profile name={name} avatarURL={avatarURL} />
+                }
             </div>
         )
     }
 }
 
 const mapStatetoProps = ({ authedUser, users }) => {
-    const user = users.length ? users[authedUser] : null
+    if (!users || !users[authedUser]) return {}
 
-    if (user) {
-        const { avatarURL, name } = user
-    
-        return {
-            name,
-            avatarURL
-        }
+    const user = users[authedUser]
+    const { name, avatarURL } = user
+
+    return {
+        name,
+        avatarURL: avatarURL.replace('{username}', name)
     }
-
-    return {}
 }
 
 export default connect(mapStatetoProps)(Nav)

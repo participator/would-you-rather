@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Login from './Login';
 import Home from './Home';
+import Question from './Question';
 import './App.css';
 
 class App extends Component {
@@ -15,7 +16,8 @@ class App extends Component {
     return (
       <div>
         <Login />
-        <Home />
+        {/* <Home /> */}
+        <Question />
       </div>
     )
   }

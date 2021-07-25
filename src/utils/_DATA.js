@@ -2,7 +2,7 @@ let users = {
     sarahedo: {
       id: 'sarahedo',
       name: 'Sarah Edo',
-      avatarURL: 'http://placekitten.com/200/300',
+      avatarURL: 'https://via.placeholder.com/50/db3069/f7fff7?text={username}',
       answers: {
         "8xf0y6ziyjabvozdd253nd": 'optionOne',
         "6ni6ok3ym7mf1p33lnez": 'optionTwo',
@@ -14,7 +14,7 @@ let users = {
     tylermcginnis: {
       id: 'tylermcginnis',
       name: 'Tyler McGinnis',
-      avatarURL: 'https://via.placeholder.com/200x300?text={username}',
+      avatarURL: 'https://via.placeholder.com/50/577590/F3CA70?text={username}',
       answers: {
         "vthrdm985a262al8qx3do": 'optionOne',
         "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -24,7 +24,7 @@ let users = {
     johndoe: {
       id: 'johndoe',
       name: 'John Doe',
-      avatarURL: 'http://placekitten.com/200/300',
+      avatarURL: 'https://via.placeholder.com/50/FFBA08/1C3144?text={username}',
       answers: {
         "xj352vofupe1dqz9emx13r": 'optionOne',
         "vthrdm985a262al8qx3do": 'optionTwo',
