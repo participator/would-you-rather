@@ -4,32 +4,31 @@ import Profile from './Profile'
 import Option from './Option'
 
 const Question = (props) => {
-    const {
-        authedUser,
-        authedUserVoted,
-        author,
-        optionOne,
-        optionTwo,
-     } = props
-     const { avatarURL, name } = author
-
-    const [oneSelected, setOneSelected] = useState(false)
-    const [twoSelected, setTwoSelected] = useState(false)
+    const [selected, setSelected] = useState()
 
     const [optionOneId, optionTwoId] = [1, 2]
 
+    const {
+        authedUser,
+        authedUserVoted,
+        author = {},
+        optionOne = {},
+        optionTwo = {},
+    } = props
+
+    const { avatarURL, name } = author
+
     const handleClick = (event) => {
         if (authedUserVoted === false) {
-            setOneSelected(false)
-            setTwoSelected(false)
+            setSelected(false)
 
             switch (Number(event.target.id)) {
                 case optionOneId:
-                    setOneSelected(true)
+                    setSelected(optionOneId)
                     break;
 
                 case optionTwoId:
-                    setTwoSelected(true)
+                    setSelected(optionTwoId)
                     break;
             }
         }
@@ -59,7 +58,7 @@ const Question = (props) => {
                         voteAmount={optionOne.voteAmount}
                         votePercentage={optionOne.votePercentage}
                         text={optionOne.text}
-                        selected={optionOne.selected ?? oneSelected}
+                        selected={optionOne.selected ?? selected === optionOneId}
                         statsShow={authedUserVoted}
                         onClick={(event) => handleClick(event)} />
                     <Option
@@ -67,18 +66,20 @@ const Question = (props) => {
                         voteAmount={optionOne.voteAmount}
                         votePercentage={optionOne.votePercentage}
                         text={optionTwo.text}
-                        selected={optionTwo.selected ?? twoSelected}
+                        selected={optionTwo.selected ?? selected === optionTwoId}
                         statsShow={authedUserVoted}
                         onClick={(event) => handleClick(event)} />
-                    <button type="submit" disabled={authedUserVoted}>Submit</button>
+                    {!authedUserVoted && <button type="submit">Submit</button>}
                 </form>
             </div>
-        </div>
+        </div >
     )
 }
 
-const mapStateToProps = ({ authedUser, questions, users }, id) => {
+const mapStateToProps = ({ authedUser, questions, users }, { id }) => {
+    console.log('id', id)
     const question = questions[id]
+    console.log('questions', questions, 'question', question)
 
     // check that question exist
     if (question === undefined || users === undefined) return {}

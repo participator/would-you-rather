@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Login from './Login';
-import Home from './Home';
-import Question from './Question';
 import './App.css';
+import Nav from './Nav';
+import Create from './Create';
 
 class App extends Component {
   componentDidMount() {
@@ -16,14 +16,13 @@ class App extends Component {
     return (
       <div>
         <Login />
-        {/* <Home /> */}
-        <Question />
+        <Create />
       </div>
     )
   }
 }
 
-const mapStatetoProps = ({authedUser, users, questions}) => {
+const mapStateToProps = ({authedUser, users, questions}) => {
   
   return {
     authedUser: authedUser,
@@ -32,4 +31,4 @@ const mapStatetoProps = ({authedUser, users, questions}) => {
   }
 }
 
-export default connect(mapStatetoProps)(App);
+export default connect(mapStateToProps)(App);
