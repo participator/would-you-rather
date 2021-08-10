@@ -1,0 +1,5 @@
+:root {
+    --card-background-dark: rgb(240, 240, 240);
+    --question-category-background: rgb(27, 82, 153);
+    --question-category-background-selected: rgb(5, 168, 170);
+}

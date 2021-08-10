@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Title from "./Title"
 import Questions from './Questions'
-import "./App.css"
+import "./Home.css"
 
 const Home = () => {
     const [showAnswered, setShowAnswered] = useState(true)
@@ -13,22 +13,22 @@ const Home = () => {
     }
 
     return (
-        <div>
+        <div className="Home">
             <Title tag="h1">Home</Title>
-            <div>
+            <div className='Home-categories'>
                 <button
-                    className={showAnswered === true ? "selected" : null}
+                    className={`Home-category ${showAnswered === true ? 'Home-category-selected' : null}`}
                     onClick={(event) => handleClick(event)}>
                     Answered
                 </button>
                 <button
-                    className={showAnswered === false ? "selected" : null}
+                    className={`Home-category ${showAnswered === false ? 'Home-category-selected' : null}`}
                     onClick={(event) => handleClick(event)}>
                     Unanswered
                 </button>
-                <Questions showAnswered={showAnswered} />
             </div>
-
+            Would You Rather
+            <Questions showAnswered={showAnswered} />
         </div>
     )
 }

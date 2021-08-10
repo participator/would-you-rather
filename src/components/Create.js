@@ -63,6 +63,8 @@ const Create = (props) => {
                 setOptionTwo(value)
                 setErrorTwo(false)
                 break;
+            default:
+                break;
         }
     }
 

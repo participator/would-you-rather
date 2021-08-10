@@ -1,0 +1,25 @@
+.Questions-question {
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    color: black;
+    padding: .5em 1em;
+    margin: .5em 0;
+    text-decoration: none;
+}
+.Questions-question:nth-child(2n) {
+    background-color: var(--card-background-dark);
+}
+.Questions-question-profile {
+    padding: 0 1em;
+    width: 100px;
+}
+.Questions-question-details {
+    display: flex;
+    flex-direction: column;
+}
+.Questions-question-option {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0.5em 0;
+}

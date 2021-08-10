@@ -1,5 +1,3 @@
-import authedUser from "../reducer/authedUser"
-
 export const LOGIN_USER = 'LOGIN_USER'
 export const LOGOFF_USER = 'LOGOFF_USER'
 

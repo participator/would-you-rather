@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Profile from './Profile'
+import './Questions.css'
 
 const Questions = (props) => {
     const { questions } = props
@@ -13,17 +14,20 @@ const Questions = (props) => {
                     const { avatarURL, name } = author
 
                     return (
-                        <Link key={id} to={{
+                        <Link className='Questions-question' key={id} to={{
                             pathname: `questions/:${id}`,
                             state: { id: `${id}` }
                         }}>
-                            Would You Rather
                             <Profile
+                                className='Questions-question-profile'
+                                avatarAltText='User who asked question'
                                 avatarURL={avatarURL}
                                 name={name} />
-                            <span>Date Asked: {time}</span>
-                            <span>A: {optionOne.text}</span>
-                            <span>B: {optionTwo.text}</span>
+                            <div className='Questions-question-details'>
+                                <span>Date Asked: {time}</span>
+                                <span className='Questions-question-option'>A {optionOne.text}</span>
+                                <span className='Questions-question-option'>B {optionTwo.text}</span>
+                            </div>
                         </Link>
                     )
 

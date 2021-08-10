@@ -34,6 +34,8 @@ const Question = (props) => {
                 case optionTwoId:
                     setSelected(optionTwoId)
                     break;
+                default:
+                    break;
             }
         }
     }

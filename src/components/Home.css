@@ -1,0 +1,19 @@
+.Home {
+    margin-left: auto;
+    margin-right: auto;
+}
+.Home-categories {
+    text-align: center;
+}
+.Home-category {
+    background-color: var(--question-category-background);
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 550;
+    padding: 1em 4em;
+    margin-left: 1em;
+}
+.Home-category-selected {
+    background-color: var(--question-category-background-selected);
+}

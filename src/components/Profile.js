@@ -1,11 +1,11 @@
 import React from 'react'
 
 const Profile = (props) => {
-    const { avatarURL, name } = props
+    const { avatarURL, avatarAltText, className, name } = props
 
     return (
-        <div>
-            <img src={avatarURL} alt="User that asked this question" />
+        <div className={className}>
+            <img src={avatarURL} alt={avatarAltText || ''} />
             <div>{name}</div>
         </div>
     )
