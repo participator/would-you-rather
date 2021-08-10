@@ -1,26 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Title from './Title'
 import Profile from './Profile'
+import './Leaderboard.css'
 
 const Leaderboard = (props) => {
     const { users } = props
 
-    console.log('users', users)
-
     return (
         <div>
+            <Title tag='h1'>Leaderboard</Title>
             {
                 users ?
                     users.map(({ answered, asked, avatarURL, id, name }) => (
-                        <div key={id}>
+                        <div className='Leaderboard-user' key={id}>
                             <Profile
                                 avatarURL={avatarURL}
                                 name={name} />
-                            <div>
+                            <div className='Leaderboard-user-stats'>
                                 <span>Asked: {asked}</span>
                                 <span>Answered: {answered}</span>
                             </div>
-                            <div>{asked + answered}</div>
+                            <div className='Leaderboard-user-score'>{asked + answered}</div>
                         </div>
                     )) :
                     null

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import './Nav.css'
 import NavElement from './NavElement'
 import Profile from './Profile'
 
@@ -8,17 +9,22 @@ class Nav extends Component {
         const { name, avatarURL } = this.props
 
         return (
-            <div>
-                <ul>
-                    <NavElement label="Home" />
-                    <NavElement label="Leaderboard" />
-                    <NavElement label="Create" />
+            <header className='Nav'>
+                <img 
+                    src='../logo.png'
+                    alt='Would You Rather'
+                    className='Nav-logo' />
+                <ul className='Nav-menu'>
+                    <NavElement label="Home" url='/' />
+                    <NavElement label="Leaderboard" url='/leaderboard' />
+                    <NavElement label="Create" url='/add' />
+                    <NavElement label="SignOut" url='/' />
                 </ul>
                 {
                     (name && avatarURL) &&
                     <Profile name={name} avatarURL={avatarURL} />
                 }
-            </div>
+            </header>
         )
     }
 }

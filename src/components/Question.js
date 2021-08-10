@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { _saveQuestionAnswer } from '../utils/_DATA'
+import { saveQuestionAnswer } from '../actions/questions'
+import { saveUserQuestionAnswer } from '../actions/users'
+import Title from './Title'
 import Profile from './Profile'
 import Option from './Option'
 
 const Question = (props) => {
-    const [selected, setSelected] = useState()
+    const [selected, setSelected] = useState(false)
 
-    const [optionOneId, optionTwoId] = [1, 2]
+    const [optionOneId, optionTwoId] = ['optionOne', 'optionTwo']
 
     const {
         authedUser,
         authedUserVoted,
+        id,
+        dispatch,
         author = {},
         optionOne = {},
         optionTwo = {},
@@ -20,9 +26,7 @@ const Question = (props) => {
 
     const handleClick = (event) => {
         if (authedUserVoted === false) {
-            setSelected(false)
-
-            switch (Number(event.target.id)) {
+            switch (event.target.id) {
                 case optionOneId:
                     setSelected(optionOneId)
                     break;
@@ -37,16 +41,26 @@ const Question = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        console.log('submit question response')
+        console.log('Submit question response for', authedUser)
+
+        const answer = selected === optionOneId ?
+            optionOneId :
+            selected === optionTwoId &&
+            optionTwoId
 
         // todo: call api
-        // add authedUser to votes for appropriate option
-        // update authedUser.answers
+        // todo: Update UI: dispatch answerQuestion action
+        _saveQuestionAnswer({ authedUser, qid: id, answer}).then(() => {
+            console.log('authedUser', authedUser, 'id', id, 'answer', answer)
+            const questionId = id
+            dispatch(saveQuestionAnswer(authedUser, questionId, answer))
+            dispatch(saveUserQuestionAnswer(authedUser, questionId, answer))
+        })
     }
 
     return (
         <div>
-            Would You Rather
+            <Title tag='h1'>Would You Rather</Title>
             <div>
                 {/* Question creator */}
                 <Profile
@@ -54,32 +68,40 @@ const Question = (props) => {
                     name={name} />
                 <form name="question" onSubmit={(event) => handleSubmit(event)} >
                     <Option
-                        optionNumber={optionOneId}
+                        optionId={optionOneId}
                         voteAmount={optionOne.voteAmount}
                         votePercentage={optionOne.votePercentage}
                         text={optionOne.text}
-                        selected={optionOne.selected ?? selected === optionOneId}
+                        selected={optionOne.selected === optionTwo.selected ?
+                            selected === optionOneId :
+                            optionOne.selected
+                        }
                         statsShow={authedUserVoted}
                         onClick={(event) => handleClick(event)} />
                     <Option
-                        optionNumber={optionTwoId}
-                        voteAmount={optionOne.voteAmount}
-                        votePercentage={optionOne.votePercentage}
+                        optionId={optionTwoId}
+                        voteAmount={optionTwo.voteAmount}
+                        votePercentage={optionTwo.votePercentage}
                         text={optionTwo.text}
-                        selected={optionTwo.selected ?? selected === optionTwoId}
+                        selected={optionTwo.selected === optionOne.selected ?
+                            selected === optionTwoId :
+                            optionTwo.selected
+                        }
                         statsShow={authedUserVoted}
                         onClick={(event) => handleClick(event)} />
-                    {!authedUserVoted && <button type="submit">Submit</button>}
+                    {!authedUserVoted && <button
+                        type="submit"
+                        disabled={selected === false}
+                        onSubmit={event => { handleSubmit(event) }}>Submit</button>}
                 </form>
             </div>
         </div >
     )
 }
 
-const mapStateToProps = ({ authedUser, questions, users }, { id }) => {
-    console.log('id', id)
+const mapStateToProps = ({ authedUser, questions, users }, { match }) => {
+    const id = match.params.question_id.replace(':', '')
     const question = questions[id]
-    console.log('questions', questions, 'question', question)
 
     // check that question exist
     if (question === undefined || users === undefined) return {}
@@ -96,6 +118,7 @@ const mapStateToProps = ({ authedUser, questions, users }, { id }) => {
     return {
         authedUser,
         authedUserVoted,
+        id,
         author: {
             avatarURL,
             name
@@ -104,13 +127,13 @@ const mapStateToProps = ({ authedUser, questions, users }, { id }) => {
             selected: optionOneSelected,
             text: optionOne.text,
             voteAmount: optionOneVotes.length,
-            votePercentage: optionOneVotes.length / totalVotes
+            votePercentage: (optionOneVotes.length / totalVotes) * 100
         },
         optionTwo: {
             selected: optionTwoSelected,
             text: optionTwo.text,
             voteAmount: optionTwoVotes.length,
-            votePercentage: optionTwoVotes.length / totalVotes
+            votePercentage: (optionTwoVotes.length / totalVotes) * 100
         }
     }
 }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { handleSetAuthedUser } from '../actions/authedUser';
+import './Login.css'
 
 class Login extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            authedUser: '',
             selected: ''
         }
 
@@ -38,20 +38,30 @@ class Login extends Component {
         const { selected } = this.state
 
         return (
-            <form onSubmit={(event) => this.handleSubmit(event)}>
-                <select name="users" required defaultValue={selected} onChange={(event) => this.handleChange(event)}>
-                    <option value="" disabled>Select a User to Login</option>
-                    {usersIdName && usersIdName.map(user => (
-                        <option key={user.id} value={user.id}>{user.name}</option>
-                    ))}
-                </select>
-                <button type="submit" disabled={ selected === ''}>Login</button>
-            </form>
+            <div className='Login-page'>
+                <img 
+                    src='../logo.png'
+                    alt='Would You Rather'
+                    className='Login-logo' />
+                <form onSubmit={(event) => this.handleSubmit(event)}>
+                    <select
+                        required
+                        name="users"
+                        defaultValue={selected}
+                        onChange={(event) => this.handleChange(event)}>
+                        <option value="" disabled>Select a User to Login</option>
+                        {usersIdName && usersIdName.map(user => (
+                            <option key={user.id} value={user.id}>{user.name}</option>
+                        ))}
+                    </select>
+                    <button type="submit" disabled={selected === ''}>Login</button>
+                </form>
+            </div>
         )
     }
 }
 
-const mapStatetoProps = ({ users }) => {
+const mapStateToProps = ({ authedUser, users }) => {
     const usersIdName = Object.keys(users).map(userId => ({
         id: users[userId].id,
         name: users[userId].name
@@ -61,8 +71,9 @@ const mapStatetoProps = ({ users }) => {
     })
 
     return {
+        authedUser,
         usersIdName
     }
 }
 
-export default connect(mapStatetoProps)(Login)
+export default connect(mapStateToProps)(Login)

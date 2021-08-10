@@ -1,0 +1,11 @@
+.Nav {
+    display: flex;
+    justify-content: space-between;
+}
+.Nav-logo {
+    height: 4em;
+}
+.Nav-menu {
+    display: inline;
+    float: right;
+}

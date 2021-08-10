@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Nav from './Nav'
+import Title from "./Title"
 import Questions from './Questions'
 import "./App.css"
 
@@ -14,8 +14,7 @@ const Home = () => {
 
     return (
         <div>
-            <Nav />
-            HOME
+            <Title tag="h1">Home</Title>
             <div>
                 <button
                     className={showAnswered === true ? "selected" : null}

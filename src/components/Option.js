@@ -3,7 +3,7 @@ import { FiSquare, FiCheckSquare } from 'react-icons/fi'
 
 const Option = (props) => {
     const {
-        optionNumber,
+        optionId,
         voteAmount,
         votePercentage,
         text,
@@ -12,7 +12,7 @@ const Option = (props) => {
         onClick } = props
 
     return (
-        <div id={optionNumber} onClick={onClick}>
+        <div id={optionId} onClick={onClick}>
             {
                 selected === true ?
                     <FiCheckSquare /> :

@@ -1,23 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import Profile from './Profile'
 
 const Questions = (props) => {
-    const { questionList } = props
-
-    const handleClick = (event, id) => {
-        // Route to Details view
-        // questions/:question_id
-    }
+    const { questions } = props
 
     return (
         <div>
             {
-                questionList && questionList.map(({ author, id, time, optionOne, optionTwo }) => {
+                questions && questions.map(({ author, id, time, optionOne, optionTwo }) => {
                     const { avatarURL, name } = author
 
                     return (
-                        <div key={id} onClick={(event, id) => handleClick(event, id)}>
+                        <Link key={id} to={{
+                            pathname: `questions/:${id}`,
+                            state: { id: `${id}` }
+                        }}>
                             Would You Rather
                             <Profile
                                 avatarURL={avatarURL}
@@ -25,7 +24,7 @@ const Questions = (props) => {
                             <span>Date Asked: {time}</span>
                             <span>A: {optionOne.text}</span>
                             <span>B: {optionTwo.text}</span>
-                        </div>
+                        </Link>
                     )
 
                 })
@@ -35,7 +34,6 @@ const Questions = (props) => {
 }
 
 const mapStateToProps = ({ authedUser, questions, users }, { showAnswered }) => {
-    console.log('questions', questions, 'showAnswered', showAnswered)
     if (!questions) return {}
 
     const questionList = Object.values(questions).filter(({ optionOne, optionTwo }) => {
@@ -58,10 +56,8 @@ const mapStateToProps = ({ authedUser, questions, users }, { showAnswered }) => 
         }
     })
 
-    console.log('questionList', questionList)
-
     return {
-        questionList
+        questions: questionList
     }
 }
 

@@ -1,31 +1,53 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router'
+import { _saveQuestion } from '../utils/_DATA'
+import { saveQuestion } from '../actions/questions'
+import { saveUserQuestionAsked } from '../actions/users'
+import Title from './Title'
 
 const Create = (props) => {
-    const [aOption, setAOption] = useState('')
-    const [aError, setAError] = useState(false)
+    const history = useHistory()
+    const [optionOne, setOptionOne] = useState('')
+    const [errorOne, setErrorOne] = useState(false)
 
-    const [bOption, setBOption] = useState('')
-    const [bError, setBError] = useState(false)
+    const [optionTwo, setOptionTwo] = useState('')
+    const [errorTwo, setErrorTwo] = useState(false)
 
-    const { authedUser } = props
+    const { authedUser, dispatch, questions } = props
 
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        if (!aOption) {
-            setAError(true)
+        if (!optionOne && !optionTwo) {
+            setErrorOne(true)
+            setErrorTwo(true)
             return
         }
 
-        if (!bOption) {
-            setBError(true)
+        if (!optionOne) {
+            setErrorOne(true)
             return
         }
 
-        // Save question
-        // add questionId to user's asked 
-        // add question to questions
+        if (!optionTwo) {
+            setErrorTwo(true)
+            return
+        }
+
+        const question = {
+            author: authedUser,
+            optionOneText: optionOne,
+            optionTwoText: optionTwo
+        }
+
+        // Save question on DB and UI
+        _saveQuestion(question).then(question => {
+            const { id:questionId } = question
+            dispatch(saveQuestion(authedUser, question, questions))
+            dispatch(saveUserQuestionAsked(authedUser, questionId))
+            history.push('/')
+        }).catch(error => console.log('[Error]:', error))
     }
 
     const handleChange = (event, option) => {
@@ -33,39 +55,40 @@ const Create = (props) => {
 
         switch (option) {
             case 'a':
-                setAOption(value)
-                setAError(false)
+                setOptionOne(value)
+                setErrorOne(false)
                 break;
 
             case 'b':
-                setBOption(value)
-                setBError(false)
+                setOptionTwo(value)
+                setErrorTwo(false)
                 break;
         }
     }
 
     return (
         <div>
+            <Title tag="h1">Create</Title>
             <form onSubmit={(event) => { handleSubmit(event) }} >
                 <div>
                     <label htmlFor='a'>A</label>
                     <input
                         id='a'
                         type='text'
-                        value={aOption}
+                        value={optionOne}
                         placeholder='Enter an option'
                         onChange={(event) => handleChange(event, 'a')} />
-                    <span style={{ display: aError === false ? 'none' : 'block' }}>Submit an option for A</span>
+                    <span style={{ display: errorOne === false ? 'none' : 'block' }}>Submit an option for A</span>
                 </div>
                 <div>
                     <label htmlFor='b'>B</label>
                     <input
                         id='b'
                         type='text'
-                        value={bOption}
+                        value={optionTwo}
                         placeholder='Enter an option'
                         onChange={(event) => handleChange(event, 'b')} />
-                    <span style={{ display: bError === false ? 'none' : 'block' }}>Submit an option for B</span>
+                    <span style={{ display: errorTwo === false ? 'none' : 'block' }}>Submit an option for B</span>
                 </div>
                 <button type='submit'>Submit</button>
             </form>
@@ -73,9 +96,10 @@ const Create = (props) => {
     )
 }
 
-const mapStateToProps = ({ authedUser }) => {
+const mapStateToProps = ({ authedUser, questions }) => {
     return {
-        authedUser
+        authedUser,
+        questions
     }
 }
 
