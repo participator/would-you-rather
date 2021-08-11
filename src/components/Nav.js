@@ -29,7 +29,7 @@ class Nav extends Component {
     }
 }
 
-const mapStatetoProps = ({ authedUser, users }) => {
+const mapStateToProps = ({ authedUser, users }) => {
     if (!users || !users[authedUser]) return {}
 
     const user = users[authedUser]
@@ -41,4 +41,4 @@ const mapStatetoProps = ({ authedUser, users }) => {
     }
 }
 
-export default connect(mapStatetoProps)(Nav)
+export default connect(mapStateToProps)(Nav)
