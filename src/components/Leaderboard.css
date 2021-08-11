@@ -3,8 +3,8 @@
     align-items: center;
     justify-content: space-between;
     border: 1px solid lightgray;
-    padding: .5em 1em;
-    margin: .5em 0;
+    padding: 0.5em 1em;
+    margin: 0.5em 0;
 }
 .Leaderboard-user:nth-child(2n+1) {
     background-color: var(--card-background-dark);

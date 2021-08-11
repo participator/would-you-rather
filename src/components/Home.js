@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Title from "./Title"
+import Title from './Title'
 import Questions from './Questions'
-import "./Home.css"
+import './Home.css'
 
 const Home = () => {
     const [showAnswered, setShowAnswered] = useState(true)
@@ -13,7 +13,7 @@ const Home = () => {
     }
 
     return (
-        <div className="Home">
+        <div className='Home'>
             <Title tag="h1">Home</Title>
             <div className='Home-categories'>
                 <button

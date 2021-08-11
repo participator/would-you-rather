@@ -3,8 +3,8 @@
     align-items: center;
     border: 1px solid lightgray;
     color: black;
-    padding: .5em 1em;
-    margin: .5em 0;
+    padding: 0.5em 1em;
+    margin: 0.5em 0;
     text-decoration: none;
 }
 .Questions-question:nth-child(2n) {
