@@ -13,10 +13,14 @@ import Create from './Create'
 import Home from './Home'
 import Leaderboard from './Leaderboard'
 import Question from './Question'
+import NoMatch from './NoMatch'
+import { handleSetAuthedUser } from '../actions/authedUser'
 
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props
+    const authedUser = localStorage.getItem('authedUser') || ''
+    dispatch(handleSetAuthedUser(authedUser))
     dispatch(handleInitialData())
   }
 
@@ -37,7 +41,7 @@ class App extends Component {
             <Login /> :
             <Switch>
               <Route exact path='/' >
-                < Home />
+                <Home />
               </Route>
               <Route path='/add'>
                 <Create />
@@ -47,6 +51,9 @@ class App extends Component {
               </Route>
               <Route path='/questions/:question_id'
               component={Question} />
+              <Route>
+                <NoMatch />
+              </Route>
             </Switch>
         }
 
@@ -55,12 +62,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser, users, questions }) => {
-
+const mapStateToProps = ({ authedUser }) => {
   return {
-    authedUser: authedUser,
-    users: users,
-    questions: questions
+    authedUser: authedUser
   }
 }
 

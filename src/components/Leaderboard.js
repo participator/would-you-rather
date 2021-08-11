@@ -15,6 +15,7 @@ const Leaderboard = (props) => {
                     users.map(({ answered, asked, avatarURL, id, name }) => (
                         <div className='Leaderboard-user' key={id}>
                             <Profile
+                            className='Leaderboard-profile'
                                 avatarURL={avatarURL}
                                 name={name} />
                             <div className='Leaderboard-user-stats'>
@@ -39,7 +40,12 @@ const mapStateToProps = ({ users }) => {
         avatarURL,
         id,
         name
-    }))
+    })).sort((a, b) => {
+        const aScore = a.answered + a.asked
+        const bScore = b.answered + b.asked
+        if (aScore > bScore) return -1
+        else return 1
+    })
 
     return {
         users

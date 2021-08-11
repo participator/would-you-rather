@@ -1,0 +1,20 @@
+.Create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid lightgray;
+    color: black;
+    margin: 0.5em auto;
+    max-width: 500px;
+    padding-bottom: 1em;
+}
+.Create-option {
+    margin-bottom: 0.5em;
+}
+.Create-option-label {
+    margin-bottom: 0.5em;
+    margin-right: 5px;
+}
+.Create-submit {
+    width: 100%;
+}

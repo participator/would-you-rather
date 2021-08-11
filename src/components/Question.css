@@ -1,0 +1,12 @@
+.Question {
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    color: black;
+    padding: 0.5em 1em;
+    margin: 0.5em auto;
+    max-width: 500px;
+}
+.Question-profile {
+    margin: auto 1em;
+}

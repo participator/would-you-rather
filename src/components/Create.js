@@ -5,6 +5,7 @@ import { _saveQuestion } from '../utils/_DATA'
 import { saveQuestion } from '../actions/questions'
 import { saveUserQuestionAsked } from '../actions/users'
 import Title from './Title'
+import './Create.css'
 
 const Create = (props) => {
     const history = useHistory()
@@ -43,7 +44,7 @@ const Create = (props) => {
 
         // Save question on DB and UI
         _saveQuestion(question).then(question => {
-            const { id:questionId } = question
+            const { id: questionId } = question
             dispatch(saveQuestion(authedUser, question, questions))
             dispatch(saveUserQuestionAsked(authedUser, questionId))
             history.push('/')
@@ -70,30 +71,37 @@ const Create = (props) => {
 
     return (
         <div>
-            <Title tag="h1">Create</Title>
-            <form onSubmit={(event) => { handleSubmit(event) }} >
-                <div>
-                    <label htmlFor='a'>A</label>
-                    <input
-                        id='a'
-                        type='text'
-                        value={optionOne}
-                        placeholder='Enter an option'
-                        onChange={(event) => handleChange(event, 'a')} />
-                    <span style={{ display: errorOne === false ? 'none' : 'block' }}>Submit an option for A</span>
-                </div>
-                <div>
-                    <label htmlFor='b'>B</label>
-                    <input
-                        id='b'
-                        type='text'
-                        value={optionTwo}
-                        placeholder='Enter an option'
-                        onChange={(event) => handleChange(event, 'b')} />
-                    <span style={{ display: errorTwo === false ? 'none' : 'block' }}>Submit an option for B</span>
-                </div>
-                <button type='submit'>Submit</button>
-            </form>
+            <Title tag='h1'>Create</Title>
+            <div className='Create'>
+                <Title tag='h2' className='Create-subtitle'>Would You Rather</Title>
+                <form onSubmit={(event) => { handleSubmit(event) }} >
+                    <div className='Create-option'>
+                        <label className='Create-option-label' htmlFor='a'>A</label>
+                        <input
+                            id='a'
+                            type='text'
+                            value={optionOne}
+                            placeholder='Enter an option'
+                            onChange={(event) => handleChange(event, 'a')} />
+                        <span style={{ display: errorOne === false ? 'none' : 'block' }}>Submit an option for A</span>
+                    </div>
+                    <div className='Create-option'>
+                        <label className='Create-option-label' htmlFor='b'>B</label>
+                        <input
+                            id='b'
+                            type='text'
+                            value={optionTwo}
+                            placeholder='Enter an option'
+                            onChange={(event) => handleChange(event, 'b')} />
+                        <span style={{ display: errorTwo === false ? 'none' : 'block' }}>Submit an option for B</span>
+                    </div>
+                    <button
+                        className='Create-submit'
+                        type='submit'>
+                        Submit
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }

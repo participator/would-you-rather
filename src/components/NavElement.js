@@ -13,13 +13,16 @@ const NavElement = ({ label, signOut, url }) => {
         switch (id) {
             case 'Home':
             case 'Leaderboard':
-            case 'Create':
+            case 'Create': {
                 history.push(`${url}`)
                 break
-            case 'SignOut':
+            }
+            case 'SignOut': {
                 history.push(`${url}`)
+                localStorage.removeItem('authedUser')
                 signOut()
                 break
+            }
             default:
                 break;
         }

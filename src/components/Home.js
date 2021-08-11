@@ -14,7 +14,7 @@ const Home = () => {
 
     return (
         <div className='Home'>
-            <Title tag="h1">Home</Title>
+            <Title tag='h1'>Home</Title>
             <div className='Home-categories'>
                 <button
                     className={`Home-category ${showAnswered === true ? 'Home-category-selected' : null}`}
@@ -27,7 +27,7 @@ const Home = () => {
                     Unanswered
                 </button>
             </div>
-            Would You Rather
+            <Title tag='h2' className='Home-subtitle'>Would You Rather</Title>
             <Questions showAnswered={showAnswered} />
         </div>
     )

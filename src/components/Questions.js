@@ -40,12 +40,18 @@ const Questions = (props) => {
 const mapStateToProps = ({ authedUser, questions, users }, { showAnswered }) => {
     if (!questions) return {}
 
-    const questionList = Object.values(questions).filter(({ optionOne, optionTwo }) => {
+    const questionList = Object.values(questions)
+    .filter(({ optionOne, optionTwo }) => {
         if (showAnswered) {
             return optionOne.votes.includes(authedUser) || optionTwo.votes.includes(authedUser)
         }
         return !optionOne.votes.includes(authedUser) && !optionTwo.votes.includes(authedUser)
-    }).map(({ id, author, timestamp, optionOne, optionTwo }) => {
+    })
+    .sort((a, b) => { 
+        if (a.timestamp > b.timestamp) return -1
+        else return 1
+    })
+    .map(({ id, author, timestamp, optionOne, optionTwo }) => {
         const { avatarURL, name } = users[author]
 
         return {

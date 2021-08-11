@@ -1,8 +1,8 @@
 import './Title.css'
 
-const Title = ({children, tag:Tag}) => {
+const Title = ({children, className, tag:Tag}) => {
     return (
-        <Tag className="Title">{children}</Tag>
+        <Tag className={`Title ${className}`}>{children}</Tag>
     )
 }
 

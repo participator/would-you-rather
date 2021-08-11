@@ -6,6 +6,7 @@ import { saveUserQuestionAnswer } from '../actions/users'
 import Title from './Title'
 import Profile from './Profile'
 import Option from './Option'
+import './Question.css'
 
 const Question = (props) => {
     const [selected, setSelected] = useState(false)
@@ -24,9 +25,9 @@ const Question = (props) => {
 
     const { avatarURL, name } = author
 
-    const handleClick = (event) => {
-        if (authedUserVoted === false) {
-            switch (event.target.id) {
+    const handleClick = (id) => {
+        if (authedUserVoted === false) { 
+            switch (id) {
                 case optionOneId:
                     setSelected(optionOneId)
                     break;
@@ -52,7 +53,7 @@ const Question = (props) => {
 
         // todo: call api
         // todo: Update UI: dispatch answerQuestion action
-        _saveQuestionAnswer({ authedUser, qid: id, answer}).then(() => {
+        _saveQuestionAnswer({ authedUser, qid: id, answer }).then(() => {
             console.log('authedUser', authedUser, 'id', id, 'answer', answer)
             const questionId = id
             dispatch(saveQuestionAnswer(authedUser, questionId, answer))
@@ -63,9 +64,10 @@ const Question = (props) => {
     return (
         <div>
             <Title tag='h1'>Would You Rather</Title>
-            <div>
+            <div className='Question'>
                 {/* Question creator */}
                 <Profile
+                    className='Question-profile'
                     avatarURL={avatarURL}
                     name={name} />
                 <form name="question" onSubmit={(event) => handleSubmit(event)} >
@@ -129,13 +131,13 @@ const mapStateToProps = ({ authedUser, questions, users }, { match }) => {
             selected: optionOneSelected,
             text: optionOne.text,
             voteAmount: optionOneVotes.length,
-            votePercentage: (optionOneVotes.length / totalVotes) * 100
+            votePercentage: Math.round((optionOneVotes.length / totalVotes) * 100)
         },
         optionTwo: {
             selected: optionTwoSelected,
             text: optionTwo.text,
             voteAmount: optionTwoVotes.length,
-            votePercentage: (optionTwoVotes.length / totalVotes) * 100
+            votePercentage: Math.round((optionTwoVotes.length / totalVotes) * 100)
         }
     }
 }

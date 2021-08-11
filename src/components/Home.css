@@ -17,3 +17,6 @@
 .Home-category-selected {
     background-color: var(--question-category-background-selected);
 }
+.Home-subtitle {
+    text-align: left;
+}

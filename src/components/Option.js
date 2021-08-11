@@ -1,5 +1,6 @@
 import React from 'react'
 import { FiSquare, FiCheckSquare } from 'react-icons/fi'
+import './Option.css'
 
 const Option = (props) => {
     const {
@@ -11,19 +12,34 @@ const Option = (props) => {
         statsShow,
         onClick } = props
 
+    const handleClick = (event) => {
+        event.stopPropagation()
+        props.onClick(optionId)
+    }
+
     return (
-        <div id={optionId} onClick={onClick}>
-            {
-                selected === true ?
-                    <FiCheckSquare /> :
-                    <FiSquare />
-            }
-            {text}
+        <div
+            className='Option'
+            id={optionId}
+            onClick={onClick}>
+            <div
+                className='Option-option'
+                onClick={handleClick}>
+                {
+                    selected === true ?
+                        <FiCheckSquare /> :
+                        <FiSquare />
+                }
+                <span
+                    onClick={handleClick}>
+                        {text}
+                    </span>
+            </div>
             {
                 statsShow === true ?
-                    <div>
+                    <div className='Option-stats'>
                         <p>Number of Votes: {voteAmount}</p>
-                        <p>Percentage of Votes: {votePercentage}</p>
+                        <p>Percentage of Votes: {votePercentage}%</p>
                     </div> :
                     null
             }

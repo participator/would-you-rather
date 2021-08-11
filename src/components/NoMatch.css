@@ -1,0 +1,13 @@
+.NoMatch-logo {
+    display: block;
+    margin: 1em auto;
+    width: 20em;
+}
+.NoMatch-description {
+    margin: 0 auto;
+    max-width: 500px;
+}
+.NoMatch-error {
+    font-weight: bolder;
+    font-size: 2em;
+}

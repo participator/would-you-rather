@@ -1,0 +1,16 @@
+.Option {
+    font-weight: bold;
+    margin: 0em 0 1em;
+}
+.Option-option {
+    display: flex;
+    align-content: center;
+    margin: 5px 0;
+}
+.Option-stats {
+    font-size: small;
+    font-weight: normal;
+}
+.Option-stats p {
+    margin: 0;
+}
