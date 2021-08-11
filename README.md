@@ -3,14 +3,29 @@ This is a web version of the "Would You Rather" game.  Users can answer question
 
 Credits: This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Project Dependencies
+This project uses the following npm packages:
+
+- react
+- react-dom
+- react-icons
+- react-redux
+- react-router-dom
+- redux
+- redux-thunk
+
 ## Available Scripts
 
 In the project directory, you can run:
 
+### `yarn install`
+
+Must be ran before starting the application to install all project dependencies
+
 ### `yarn start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+By default, the app launches on port 3000.  Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
