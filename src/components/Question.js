@@ -54,7 +54,7 @@ const Question = (props) => {
         // todo: call api
         // todo: Update UI: dispatch answerQuestion action
         _saveQuestionAnswer({ authedUser, qid: id, answer }).then(() => {
-            console.log('authedUser', authedUser, 'id', id, 'answer', answer)
+            // console.log('authedUser', authedUser, 'id', id, 'answer', answer)
             const questionId = id
             dispatch(saveQuestionAnswer(authedUser, questionId, answer))
             dispatch(saveUserQuestionAnswer(authedUser, questionId, answer))
