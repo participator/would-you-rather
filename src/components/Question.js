@@ -44,7 +44,7 @@ const Question = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        console.log('Submit question response for', authedUser)
+        // console.log('Submit question response for', authedUser)
 
         const answer = selected === optionOneId ?
             optionOneId :

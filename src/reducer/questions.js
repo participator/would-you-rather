@@ -6,7 +6,6 @@ import {
 
 const questions = (state = {}, action) => {
     const { type } = action
-    console.log('questions state', state)
 
     switch (type) {
         case RECEIVE_QUESTIONS: {
@@ -25,7 +24,6 @@ const questions = (state = {}, action) => {
         }
         case SAVE_QUESTION_ANSWER: {
             const { authedUser, questionId, answer } = action
-            console.log('[SAVE_QUESTION_ANSWER]', state[questionId], 'id', questionId)
             const authedUserQuestionAnswer = {
                 ...state[questionId],
                 [answer]: {
