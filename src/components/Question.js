@@ -7,6 +7,7 @@ import Title from './Title'
 import Profile from './Profile'
 import Option from './Option'
 import './Question.css'
+import NoMatch from './NoMatch'
 
 const Question = (props) => {
     const [selected, setSelected] = useState(false)
@@ -21,6 +22,7 @@ const Question = (props) => {
         author = {},
         optionOne = {},
         optionTwo = {},
+        noMatch,
     } = props
 
     const { avatarURL, name } = author
@@ -62,6 +64,8 @@ const Question = (props) => {
     }
 
     return (
+        noMatch ?
+        <NoMatch /> :
         <div>
             <Title tag='h1'>Would You Rather</Title>
             <div className='Question'>
@@ -104,11 +108,15 @@ const Question = (props) => {
 }
 
 const mapStateToProps = ({ authedUser, questions, users }, { match }) => {
-    const id = match.params.question_id.replace(':', '')
+    const id = match.params.question_id
     const question = questions[id]
 
     // check that question exist
-    if (question === undefined || users === undefined) return {}
+    if (question === undefined) return {
+        noMatch: true
+    }
+
+    if (users === undefined) return {}
 
     const { author, optionOne, optionTwo } = question
     const { avatarURL, name } = users[author]

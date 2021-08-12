@@ -29,7 +29,7 @@ class Login extends Component {
 
         // set AuthedUser state in store
         const { dispatch } = this.props
-        localStorage.setItem('authedUser', selected)
+        // localStorage.setItem('authedUser', selected)
         dispatch(handleSetAuthedUser(selected))
     }
 

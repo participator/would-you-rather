@@ -8,6 +8,8 @@
     max-width: 500px;
 }
 .NoMatch-error {
+    display: block;
     font-weight: bolder;
     font-size: 2em;
+    margin: 0.5em 0;
 }

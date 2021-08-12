@@ -15,7 +15,7 @@ const Questions = (props) => {
 
                     return (
                         <Link className='Questions-question' key={id} to={{
-                            pathname: `questions/:${id}`,
+                            pathname: `questions/${id}`,
                             state: { id: `${id}` }
                         }}>
                             <Profile

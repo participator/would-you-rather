@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { 
-  BrowserRouter as Router, 
-  Route, 
+import {
+  BrowserRouter as Router,
+  Route,
   Switch,
 } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
@@ -14,13 +14,14 @@ import Home from './Home'
 import Leaderboard from './Leaderboard'
 import Question from './Question'
 import NoMatch from './NoMatch'
-import { handleSetAuthedUser } from '../actions/authedUser'
+// import { handleSetAuthedUser } from '../actions/authedUser'
 
 class App extends Component {
+
   componentDidMount() {
     const { dispatch } = this.props
-    const authedUser = localStorage.getItem('authedUser') || ''
-    dispatch(handleSetAuthedUser(authedUser))
+    // const authedUser = localStorage.getItem('authedUser') || ''
+    // dispatch(handleSetAuthedUser(authedUser))
     dispatch(handleInitialData())
   }
 
@@ -50,7 +51,7 @@ class App extends Component {
                 <Leaderboard />
               </Route>
               <Route path='/questions/:question_id'
-              component={Question} />
+                component={Question} />
               <Route>
                 <NoMatch />
               </Route>

@@ -19,7 +19,7 @@ const NavElement = ({ label, signOut, url }) => {
             }
             case 'SignOut': {
                 history.push(`${url}`)
-                localStorage.removeItem('authedUser')
+                // localStorage.removeItem('authedUser')
                 signOut()
                 break
             }

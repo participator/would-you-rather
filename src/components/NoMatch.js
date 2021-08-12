@@ -10,8 +10,8 @@ const NoMatch = () => {
             src='../logo.png'
             alt='logo' />
             <p className='NoMatch-description'>
-                <p className='NoMatch-error'>404</p> Wow! You have done the impossible and reached a page that does not exist.
-                To return to the land of known, select a link in the navigation menu or <Link to='/'>Click to return to the Home page</Link>
+                <span className='NoMatch-error'>404</span> Wow! You have done the impossible and reached a page that does not exist.
+                To return to the land of the known, select a link in the navigation menu or <Link to='/'>Click to return to the Home page</Link>
             </p>
         </div>
     )
